@@ -27,6 +27,8 @@ skip_files:
 - ^(.*/)?.*\.py[co]
 - ^(.*/)?.*/RCS/.*
 - ^(.*/)?\..*
+- ^webapp/sass/.*
+- ^webapp/config.rb
 
 libraries:
 - name: lxml
