@@ -1,0 +1,37 @@
+application: portfolio
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: webapp/favicon.ico
+  upload: webapp/favicon.ico
+
+- url: /
+  static_files: webapp/index.html
+  upload: webapp/index.html
+
+- url: /
+  static_dir: webapp/
+
+skip_files:
+# Configuration files are sent to the server seperately.
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+
+libraries:
+- name: lxml
+  version: "latest"
+
+
+env_variables:
+  IS_APP_ENGINE: 'true'
