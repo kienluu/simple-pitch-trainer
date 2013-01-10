@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="js/vendor/jquery-1.8.3.min.js"></script>
+        <script src="js/bootstrap.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -28,16 +29,51 @@
         <div class="container">
 
         <div class="row">
-            <div class="start-page span12">
-                <p>Press the ‘Start’ to begin</p>
-                <button class="btn btn-large btn-primary start-button">Start</button>
+            <header><h1>Simple Pitch Trainer</h1></header>
+
+            <ul class="nav nav-tabs span12">
+                <li class="active"><a  data-toggle="tab" href="#startpage">Start</a></li>
+                <li><a href="#stats" data-toggle="tab">Statistics</a></li>
+            </ul>
+
+            <div class="tab-content span12">
+                <div class="tab-pane active start-page" id="startpage">
+                    <table class="middle-align">
+                        <tr>
+                            <td>
+                                <div class="start-box">
+                                    <p>Press the ‘Start’ to begin</p>
+                                    <button
+                                          class="btn btn-large btn-primary start-button">
+                                        Start
+                                    </button>
+                                </div>
+
+                                <div class="hidden trainer-box">
+                                    <div class="controls">
+                                        <button class="btn btn-large play">Play</button>
+                                    </div>
+                                    <div class="answer-choices">
+                                        <p>
+                                            Second tone is:
+                                        </p>
+                                        <div class="btn-group">
+                                            <button class="btn btn-large higher disabled">Higher</button>
+                                            <button class="btn btn-large lower disabled">Lower</button>
+                                            <button class="btn btn-large same disabled">Same</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane" id="stats">Stats here</div>
             </div>
         </div>
 
         </div><!-- end class container -->
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 

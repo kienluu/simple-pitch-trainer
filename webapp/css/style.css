@@ -1,0 +1,27 @@
+/* line 2, ../sass/style.scss */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* line 7, ../sass/style.scss */
+ul.tabs {
+  text-align: center;
+}
+
+/* line 11, ../sass/style.scss */
+table.middle-align {
+  width: 100%;
+  height: 100%;
+}
+/* line 14, ../sass/style.scss */
+table.middle-align td {
+  vertical-align: middle;
+}
+
+/* line 19, ../sass/style.scss */
+.start-page {
+  height: 500px;
+  text-align: center;
+  font-size: 18px;
+}
