@@ -5,8 +5,21 @@
             $('.trainer-box').removeClass('hidden');
         });
 
+        var noteTrainerApp = new NoteTrainerApp();
+
+        $('.trainer-box .play').click(function(){
+            noteTrainerApp.play();
+        });
+
         // Debug
         $('.start-button').click();
+        window.app = noteTrainerApp;
+        noteTrainerApp.makeQuestion();
+
+        $('audio.test').bind('canplay',function(){
+            this.currentTime = 0;
+            console.log('can play');
+        });
     });
 
     var RandomNoteTrainer = function () {
@@ -24,21 +37,74 @@
                 for (var j=0; j < letters.length; j++){
                     notes.push({
                        url: encodeURI(urlPrefix + letters[j].replace('#','sharp') + octave + extension),
-                       name: letters[j]
+                       name: letters[j],
+                       value: parseInt(j)
                     });
                 }
             }
         };
 
-        this.randomNotes = function() {
+        this.makeQuestion = function() {
             noteA = notes[Math.floor(Math.random() * notes.length)];
             noteB = notes[Math.floor(Math.random() * notes.length)];
+            console.log(noteA, noteB);
         };
 
         this.getNoteA = function() {return noteA; }
         this.getNoteB = function() {return noteB; }
+        this.answerQuestion = function(guess){
+          if (guess=='same'){
+              if (noteB.value == noteA.value) return true;
+              return false;
+          }
+          else if (guess=='lower') {
+              if (noteB.value < noteA.value) return true;
+              return false
+          }
+          else if (guess=='higher') {
+              if (noteB.value > noteA.value) return true;
+              return false;
+          }
+          throw Error('Unknown value for guess.');
+        };
 
         init();
     }
-    debugger;
+
+    var NoteTrainerApp = function() {
+        var $audioA, $audioB, audioA, audioB;
+        // Declare here for ide auto completion
+        var noteTrainer = new RandomNoteTrainer();
+
+        var init = function() {
+            // NOTE: If using source, the whole audio tag must be replaced as its src will not automatically refresh
+            var $audioBox = '';
+            $('body').append('<div id="audio-box-19875876"><audio class="audio-a" controls></audio><audio class="audio-b" controls></audio></div>');
+
+            $audioA = $('#audio-box-19875876 .audio-a');
+            audioA = $audioA.get(0);
+            window.audioA = audioA;
+            $audioB = $('#audio-box-19875876 .audio-b');
+            audioB = $audioB.get(0);
+        };
+
+        this.makeQuestion = function(){
+            noteTrainer.makeQuestion();
+            $audioA.attr('src', noteTrainer.getNoteA().url);
+            $audioB.attr('src', noteTrainer.getNoteB().url);
+        };
+
+        this.answerQuestion = function(guess){
+            return noteTrainer.answerQuestion(guess);
+        };
+
+        this.play = function() {
+            audioA.play();
+            setTimeout(function(){
+                audioB.play();
+            }, 1000);
+        };
+
+        init();
+    }
 })(window.jQuery);
