@@ -4,10 +4,17 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
+default_expiration: "1h"
+
 handlers:
 - url: /favicon\.ico
   static_files: webapp/favicon.ico
   upload: webapp/favicon.ico
+
+# Order does matter
+- url: /mp3/
+  static_dir: webapp/mp3
+  expiration: "7d"
 
 - url: /
   static_files: webapp/index.html
@@ -15,6 +22,7 @@ handlers:
 
 - url: /
   static_dir: webapp/
+
 
 skip_files:
 # Configuration files are sent to the server seperately.

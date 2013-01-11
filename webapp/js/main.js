@@ -16,10 +16,6 @@
         window.app = noteTrainerApp;
         noteTrainerApp.makeQuestion();
 
-        $('audio.test').bind('canplay',function(){
-            this.currentTime = 0;
-            console.log('can play');
-        });
     });
 
     var RandomNoteTrainer = function () {
@@ -78,8 +74,9 @@
 
         var init = function() {
             // NOTE: If using source, the whole audio tag must be replaced as its src will not automatically refresh
+            // NOTE2: chrome needs the server to support 206 partial content to play.  firefox dont but it needs ogg files
             var $audioBox = '';
-            $('body').append('<div id="audio-box-19875876"><audio class="audio-a" controls></audio><audio class="audio-b" controls></audio></div>');
+            $('body').append('<div id="audio-box-19875876"><audio class="audio-a" controls preload="auto"></audio><audio class="audio-b" controls preload="auto"></audio></div>');
 
             $audioA = $('#audio-box-19875876 .audio-a');
             audioA = $audioA.get(0);
