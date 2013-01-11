@@ -148,7 +148,7 @@
             $lowerButtons.click(function(){answerQuestion('lower')});
 
             $higherButtons = $(options.higherButtonSelectors);
-            $higherButtons.click(function(){answerQuestion('lower')});
+            $higherButtons.click(function(){answerQuestion('higher')});
 
             $playButtons = $(options.playButtonSelectors);
             $playButtons.click(function(){ play(); });
