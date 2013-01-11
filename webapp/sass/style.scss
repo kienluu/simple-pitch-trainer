@@ -20,4 +20,52 @@ table.middle-align {
   height: 500px;
   text-align: center;
   font-size: 18px;
+
+}
+
+$paddingA: 15px;
+
+.answer-choices {
+  margin-top: $paddingA;
+  margin-bottom: $paddingA;
+  button {
+    position: relative;
+    .icon-wrapper {
+      margin: 0;
+      left: 50%;
+      bottom: -5px;
+      position: absolute;
+    }
+    .icon-remove, .icon-ok {
+      margin: 0;
+      position: relative;
+      top: -7px;
+      left: -7px;
+      visibility: hidden;
+      &.show {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.answer-info {
+  margin: $paddingA 0;
+  .icon-remove, .icon-ok {
+    top: 2px;
+    position: relative;
+    left: 7px;
+  }
+
+  p {
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+}
+
+
+#audio-box-19875876 {
+  display: none;
 }

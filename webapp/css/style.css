@@ -25,3 +25,56 @@ table.middle-align td {
   text-align: center;
   font-size: 18px;
 }
+
+/* line 28, ../sass/style.scss */
+.answer-choices {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+/* line 31, ../sass/style.scss */
+.answer-choices button {
+  position: relative;
+}
+/* line 33, ../sass/style.scss */
+.answer-choices button .icon-wrapper {
+  margin: 0;
+  left: 50%;
+  bottom: -5px;
+  position: absolute;
+}
+/* line 39, ../sass/style.scss */
+.answer-choices button .icon-remove, .answer-choices button .icon-ok {
+  margin: 0;
+  position: relative;
+  top: -7px;
+  left: -7px;
+  visibility: hidden;
+}
+/* line 45, ../sass/style.scss */
+.answer-choices button .icon-remove.show, .answer-choices button .icon-ok.show {
+  visibility: visible;
+}
+
+/* line 52, ../sass/style.scss */
+.answer-info {
+  margin: 15px 0;
+}
+/* line 54, ../sass/style.scss */
+.answer-info .icon-remove, .answer-info .icon-ok {
+  top: 2px;
+  position: relative;
+  left: 7px;
+}
+/* line 60, ../sass/style.scss */
+.answer-info p {
+  display: none;
+}
+/* line 62, ../sass/style.scss */
+.answer-info p.show {
+  display: block;
+}
+
+/* line 69, ../sass/style.scss */
+#audio-box-19875876 {
+  display: none;
+}
