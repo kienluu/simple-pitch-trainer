@@ -5,20 +5,21 @@
             $('.trainer-box').removeClass('hidden');
         });
 
-        var noteTrainerApp = new NoteTrainerApp();
-
-        $('.trainer-box .play').click(function(){
-            noteTrainerApp.play();
+        var noteTrainerApp = new NoteTrainerApp({
+            sameButtonSelectors: '.btn-group button.same',
+            lowerButtonSelectors: '.btn-group button.lower',
+            higherButtonSelectors: '.btn-group button.higher',
+            playButtonSelectors: 'button.play'
         });
 
         // Debug
         $('.start-button').click();
         window.app = noteTrainerApp;
-        noteTrainerApp.makeQuestion();
 
     });
 
     var RandomNoteTrainer = function () {
+        var self = this;
         var letters = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#'];
         var octaves = ['2','3'];
         var urlPrefix = '/mp3/note_';
@@ -27,7 +28,7 @@
         var noteA;
         var noteB;
 
-        var init = function () {
+        var init = function (options) {
             for (var i=0; i < octaves.length; i++){
                 var octave = octaves[i];
                 for (var j=0; j < letters.length; j++){
@@ -40,15 +41,15 @@
             }
         };
 
-        this.makeQuestion = function() {
+        self.makeQuestion = function() {
             noteA = notes[Math.floor(Math.random() * notes.length)];
             noteB = notes[Math.floor(Math.random() * notes.length)];
             console.log(noteA, noteB);
         };
 
-        this.getNoteA = function() {return noteA; }
-        this.getNoteB = function() {return noteB; }
-        this.answerQuestion = function(guess){
+        self.getNoteA = function() {return noteA; }
+        self.getNoteB = function() {return noteB; }
+        self.answerQuestion = function(guess){
           if (guess=='same'){
               if (noteB.value == noteA.value) return true;
               return false;
@@ -67,10 +68,19 @@
         init();
     }
 
-    var NoteTrainerApp = function() {
+    var NoteTrainerEngine = function(options) {
+        var self = this;
+        options = options || {};
+        var EVENT_FINNISH_PLAY_BACK = 'finnishplayback';
+
         var $audioA, $audioB, audioA, audioB;
         // Declare here for ide auto completion
         var noteTrainer = new RandomNoteTrainer();
+        var secondTonePlayDelay = 2000;
+
+        if (typeof(options.secondTonePlayDelay) === "number"){
+            secondTonePlayDelay = options.secondTonePlayDelay;
+        }
 
         var init = function() {
             // NOTE: If using source, the whole audio tag must be replaced as its src will not automatically refresh
@@ -83,25 +93,95 @@
             window.audioA = audioA;
             $audioB = $('#audio-box-19875876 .audio-b');
             audioB = $audioB.get(0);
+
+            $audioB.bind('ended', function(){
+                if (timeOut){
+                    $(self).trigger(EVENT_FINNISH_PLAY_BACK);
+                    console.log('test');
+                }
+            });
         };
 
-        this.makeQuestion = function(){
+        self.makeQuestion = function(){
             noteTrainer.makeQuestion();
             $audioA.attr('src', noteTrainer.getNoteA().url);
             $audioB.attr('src', noteTrainer.getNoteB().url);
         };
 
-        this.answerQuestion = function(guess){
+        self.answerQuestion = function(guess){
             return noteTrainer.answerQuestion(guess);
         };
 
-        this.play = function() {
+        var timeOut;
+        self.play = function() {
+            if (timeOut) clearTimeout(timeOut);
+            audioA.pause();
+            audioA.currentTime = 0;
+            audioB.pause();
+            audioB.currentTime = 0;
+
             audioA.play();
-            setTimeout(function(){
+            timeOut = setTimeout(function(){
+                timeOut = null;
                 audioB.play();
-            }, 1000);
+                timeOut = setTimeout(function(){
+                    timeOut = null;
+                    $(self).trigger(EVENT_FINNISH_PLAY_BACK);
+                }, secondTonePlayDelay);
+            }, secondTonePlayDelay);
         };
 
         init();
     }
+
+    var NoteTrainerApp = function(options) {
+        var self = this;
+        var options = options || {};
+        var engine = new NoteTrainerEngine(options);
+        var $sameButtons, $lowerButtons, $higherButtons, $playButtons, $nextButtons;
+
+        var init = function() {
+            $sameButtons = $(options.sameButtonSelectors);
+            $sameButtons.click(function(){answerQuestion('same')});
+
+            $lowerButtons = $(options.lowerButtonSelectors);
+            $lowerButtons.click(function(){answerQuestion('lower')});
+
+            $higherButtons = $(options.higherButtonSelectors);
+            $higherButtons.click(function(){answerQuestion('lower')});
+
+            $playButtons = $(options.playButtonSelectors);
+            $playButtons.click(function(){ play(); });
+            $(engine).bind('finnishplayback', function(){
+                enablePlayButton();
+            });
+
+            $nextButtons = $(options.nextButtonSelectors);
+
+            start();
+        };
+
+        var play = function() {
+            engine.play();
+            $playButtons.prop('disabled', true);
+        };
+        self.play = play;
+
+        var enablePlayButton = function() {
+            $playButtons.prop('disabled', false);
+        };
+
+        var start  = function() {
+          engine.makeQuestion();
+        };
+
+        var answerQuestion = function(choice) {
+            var success = engine.answerQuestion(choice);
+            console.log(success);
+        };
+
+        init();
+    };
+
+
 })(window.jQuery);
