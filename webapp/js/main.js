@@ -3,6 +3,7 @@
         $('.start-button').click(function(){
             $('.start-box').addClass('hidden');
             $('.trainer-box').removeClass('hidden');
+            noteTrainerApp.play();
         });
 
         // Setup the trainer app
@@ -255,7 +256,8 @@
         var $self = $(this);
         var defaultOptions = {
             doNotDisablePlay: false,
-            difficulty: 2
+            difficulty: 2,
+            playStart: false
         }
         var options = $.extend({}, defaultOptions, _options);
 
@@ -299,7 +301,7 @@
                 $self.bind(EVENT_ANSWER_CORRECT, options.onCorrectAnswer);
             }
 
-            start();
+            restart(true);
         };
 
         var play = function() {
@@ -313,15 +315,14 @@
             $playButtons.prop('disabled', false);
         };
 
-        var start  = function() {
-          restart();
-        };
-        
-        var restart = function() {
+        var restart = function(dontPlay) {
           engine.stopAudio();
           engine.makeQuestion();
           enableChoices();
           $self.trigger('newquestion');
+          if (!dontPlay){
+            play();
+          }
         };
 
         var answerQuestion = function(choice) {
