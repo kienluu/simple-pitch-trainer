@@ -5,6 +5,16 @@
             $('.trainer-box').removeClass('hidden');
         });
 
+        // Setup the trainer app
+
+        var buttonSelectors = {
+            same: '.btn-group button.same',
+            lower: '.btn-group button.lower',
+            higher: '.btn-group button.higher',
+            play: 'button.play',
+            next: '.btn-group button.next'
+        };
+
         var resetElementStyles = function() {
             // Clear up all the answer related divs / icons
             $('.answer-info p.show, .answer-choices .icon-remove, .answer-choices .icon-ok').removeClass('show');
@@ -12,12 +22,6 @@
 
         var onNewQuestion = function() {
             resetElementStyles();
-        };
-
-        var buttonSelectors = {
-            same: '.btn-group button.same',
-            lower: '.btn-group button.lower',
-            higher: '.btn-group button.higher'
         };
 
         var onWrongAnswer = function(event, app) {
@@ -39,7 +43,8 @@
             sameButtonSelectors: buttonSelectors.same,
             lowerButtonSelectors: buttonSelectors.lower,
             higherButtonSelectors: buttonSelectors.higher,
-            playButtonSelectors: 'button.play',
+            playButtonSelectors: buttonSelectors.play,
+            nextButtonSelectors: buttonSelectors.next,
             onNewQuestion: onNewQuestion,
             onWrongAnswer: onWrongAnswer,
             onCorrectAnswer: onCorrectAnswer
@@ -194,6 +199,9 @@
             });
 
             $nextButtons = $(options.nextButtonSelectors);
+            $nextButtons.click(function(){
+                restart();
+            });
 
             if (options.onNewQuestion) {
                 $self.bind('newquestion', options.onNewQuestion);
@@ -219,7 +227,7 @@
         };
 
         var start  = function() {
-          engine.makeQuestion();
+          restart();
         };
         
         var restart = function() {
