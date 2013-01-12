@@ -62,6 +62,7 @@
             onWrongAnswer: onWrongAnswer,
             onCorrectAnswer: onCorrectAnswer,
 
+            difficulty: 1,
             doNotDisablePlay:true
         });
 
@@ -83,6 +84,13 @@
         var notes = [];
         var noteA;
         var noteB;
+        var difficulty = 3;
+        var difficultyMap = {
+            0: 48,
+            1: 24,
+            2: 12,
+            3: 6
+        } // valid levels = 0, 1
 
         var init = function () {
             for (var i=0; i < octaves.length; i++){
@@ -100,11 +108,39 @@
         };
 
         self.makeQuestion = function() {
-            noteA = notes[Math.floor(Math.random() * notes.length)];
-            noteB = notes[Math.floor(Math.random() * notes.length)];
-            //console.log(noteA, noteB);
+            if (difficultyMap[difficulty]){
+                var maxDistance = difficultyMap[difficulty];
+                var result = getTwoNotes(maxDistance)
+                noteA = notes[result.index1];
+                noteB = notes[result.index2];
+            }
+            else {
+                throw Error('Not implemented');
+            }
         };
 
+
+        var getTwoNotes = function(maxDistance) {
+            var indx = Math.floor(Math.random() * notes.length)
+            var dx = Math.floor(Math.random() * maxDistance - maxDistance/2.0);
+            var indx2 = indx + dx;
+            indx2 = Math.min(notes.length - 1, Math.max(0, indx2));
+
+            console.log(indx, indx2);
+            return {index1: indx, index2: indx2};
+        };
+
+
+        self.setDifficulty = function(level){
+            if (difficultyMap[difficulty]){
+                difficulty = level;
+            }
+            else{
+                throw Error('Not implemented');
+            }
+        }
+
+        self.getDifficulty = function() {return difficulty; };
         self.getNoteA = function() {return noteA; };
         self.getNoteB = function() {return noteB; };
         self.answerQuestion = function(guess){
@@ -119,6 +155,7 @@
           }
           throw Error('Unknown value for guess.');
         };
+
 
         init();
     };
@@ -154,6 +191,11 @@
                     $self.trigger(EVENT_FINNISH_PLAY_BACK);
                 }
             });
+        };
+
+
+        self.setDifficulty = function(level) {
+          noteTrainer.setDifficulty(level);
         };
 
         self.makeQuestion = function(){
@@ -201,7 +243,8 @@
         var self = this;
         var $self = $(this);
         var defaultOptions = {
-            doNotDisablePlay: false
+            doNotDisablePlay: false,
+            difficulty: 2
         }
         var options = $.extend({}, defaultOptions, _options);
 
@@ -214,6 +257,7 @@
         var lastChoice = '';
 
         var init = function() {
+            engine.setDifficulty(options.difficulty);
             $sameButtons = $(options.sameButtonSelectors);
             $sameButtons.click(function(){answerQuestion('same')});
 
@@ -302,6 +346,11 @@
             $lowerButtons.prop('disabled', false);
             $higherButtons.prop('disabled', false);
             $nextButtons.prop('disabled', true);
+        };
+
+
+        self.setDifficulty = function(level) {
+            engine.setDifficulty(level);
         };
 
         this.getLastChoice = function() {
