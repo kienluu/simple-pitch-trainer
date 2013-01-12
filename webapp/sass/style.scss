@@ -41,9 +41,9 @@ $paddingA: 15px;
       position: relative;
       top: -7px;
       left: -7px;
-      visibility: hidden;
+      display: none;
       &.show {
-        visibility: visible;
+        display: block;
       }
     }
   }

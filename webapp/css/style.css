@@ -48,11 +48,11 @@ table.middle-align td {
   position: relative;
   top: -7px;
   left: -7px;
-  visibility: hidden;
+  display: none;
 }
 /* line 45, ../sass/style.scss */
 .answer-choices button .icon-remove.show, .answer-choices button .icon-ok.show {
-  visibility: visible;
+  display: block;
 }
 
 /* line 52, ../sass/style.scss */

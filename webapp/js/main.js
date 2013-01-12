@@ -5,11 +5,44 @@
             $('.trainer-box').removeClass('hidden');
         });
 
+        var resetElementStyles = function() {
+            // Clear up all the answer related divs / icons
+            $('.answer-info p.show, .answer-choices .icon-remove, .answer-choices .icon-ok').removeClass('show');
+        };
+
+        var onNewQuestion = function() {
+            resetElementStyles();
+        };
+
+        var buttonSelectors = {
+            same: '.btn-group button.same',
+            lower: '.btn-group button.lower',
+            higher: '.btn-group button.higher'
+        };
+
+        var onWrongAnswer = function(event, app) {
+            resetElementStyles();
+            $button = $(buttonSelectors[app.getLastChoice()]);
+            $button.find('.icon-remove').addClass('show');
+            $('.answer-info p.wrong-text').addClass('show');
+        };
+
+        var onCorrectAnswer = function() {
+            resetElementStyles();
+            $button = $(buttonSelectors[app.getLastChoice()]);
+            $button.find('.icon-ok').addClass('show');
+            $('.answer-info p.correct-text').addClass('show');
+        };
+
+
         var noteTrainerApp = new NoteTrainerApp({
-            sameButtonSelectors: '.btn-group button.same',
-            lowerButtonSelectors: '.btn-group button.lower',
-            higherButtonSelectors: '.btn-group button.higher',
-            playButtonSelectors: 'button.play'
+            sameButtonSelectors: buttonSelectors.same,
+            lowerButtonSelectors: buttonSelectors.lower,
+            higherButtonSelectors: buttonSelectors.higher,
+            playButtonSelectors: 'button.play',
+            onNewQuestion: onNewQuestion,
+            onWrongAnswer: onWrongAnswer,
+            onCorrectAnswer: onCorrectAnswer
         });
 
         // Debug
@@ -18,8 +51,9 @@
 
     });
 
-    var RandomNoteTrainer = function () {
+    var RandomNoteTrainer = function() {
         var self = this;
+        var $self = $(this);
         var letters = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#'];
         var octaves = ['2','3'];
         var urlPrefix = '/mp3/note_';
@@ -70,6 +104,7 @@
 
     var NoteTrainerEngine = function(options) {
         var self = this;
+        var $self = $(this);
         options = options || {};
         var EVENT_FINNISH_PLAY_BACK = 'finnishplayback';
 
@@ -96,7 +131,7 @@
 
             $audioB.bind('ended', function(){
                 if (timeOut){
-                    $(self).trigger(EVENT_FINNISH_PLAY_BACK);
+                    $self.trigger(EVENT_FINNISH_PLAY_BACK);
                     console.log('test');
                 }
             });
@@ -126,7 +161,7 @@
                 audioB.play();
                 timeOut = setTimeout(function(){
                     timeOut = null;
-                    $(self).trigger(EVENT_FINNISH_PLAY_BACK);
+                    $self.trigger(EVENT_FINNISH_PLAY_BACK);
                 }, secondTonePlayDelay);
             }, secondTonePlayDelay);
         };
@@ -136,9 +171,11 @@
 
     var NoteTrainerApp = function(options) {
         var self = this;
+        var $self = $(this);
         var options = options || {};
         var engine = new NoteTrainerEngine(options);
         var $sameButtons, $lowerButtons, $higherButtons, $playButtons, $nextButtons;
+        var lastChoice = '';
 
         var init = function() {
             $sameButtons = $(options.sameButtonSelectors);
@@ -158,6 +195,16 @@
 
             $nextButtons = $(options.nextButtonSelectors);
 
+            if (options.onNewQuestion) {
+                $self.bind('newquestion', options.onNewQuestion);
+            }
+            if (options.onWrongAnswer) {
+                $self.bind('answerwrong', options.onWrongAnswer);
+            }
+            if (options.onCorrectAnswer) {
+                $self.bind('answercorrect', options.onCorrectAnswer);
+            }
+
             start();
         };
 
@@ -174,10 +221,48 @@
         var start  = function() {
           engine.makeQuestion();
         };
+        
+        var restart = function() {
+          engine.makeQuestion();  
+          enableChoices();
+          $self.trigger('newquestion');
+        };
 
         var answerQuestion = function(choice) {
+            lastChoice = choice;
             var success = engine.answerQuestion(choice);
             console.log(success);
+            if (!success){
+                onWrong();
+            }
+            else {
+                onCorrect();
+            }
+        };
+
+        var onWrong = function() {
+            $self.trigger('answerwrong', [self]);
+        };
+        
+        var onCorrect = function() {
+            $self.trigger('answercorrect', [self]);
+            disableChoices();
+        };
+
+        var disableChoices = function() {
+            $sameButtons.prop('disabled', true);
+            $lowerButtons.prop('disabled', true);
+            $higherButtons.prop('disabled', true);
+        };
+        
+        var enableChoices = function() {
+            $sameButtons.prop('disabled', false);
+            $lowerButtons.prop('disabled', false);
+            $higherButtons.prop('disabled', false);
+        };
+
+        this.getLastChoice = function() {
+            return lastChoice;
         };
 
         init();
