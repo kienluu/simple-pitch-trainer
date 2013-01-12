@@ -6,6 +6,9 @@ h1 {
   margin-bottom: 15px;
 }
 
+.main-content {
+  margin-bottom: 20px;
+}
 
 ul.nav-tabs {
   text-align: center;
@@ -109,8 +112,8 @@ $paddingA: 15px;
 
 // Responsive Changes
 
-/* Landscape phones and down */
-@media (max-width: 480px) {
+/* Landscape phones to portrait tablets */
+@media (max-width: 767px) {
   header h1 {
     font-size: 34px;
   }
