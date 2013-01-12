@@ -74,7 +74,9 @@
     var RandomNoteTrainer = function() {
         var self = this;
         var $self = $(this);
-        var letters = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#'];
+        // The naming convention starts from c not a.  so a1 is higher pitched than c1
+        // http://en.wikipedia.org/wiki/Piano_key_frequencies
+        var letters = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b'];
         var octaves = ['2','3'];
         var urlPrefix = '/mp3/note_';
         var extension = '.mp3';
@@ -89,8 +91,10 @@
                     notes.push({
                        url: encodeURI(urlPrefix + letters[j].replace('#','sharp') + octave + extension),
                        name: letters[j],
-                       value: parseInt(j)
+                       value: notes.length // Used to compare pitch
                     });
+                    //console.log(notes.length);
+                    //console.log(letters[j]+'-'+octave);
                 }
             }
         };
