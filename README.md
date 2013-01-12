@@ -2,7 +2,7 @@
 ===
 
 Welcome to ‘Simple Pitch Trainer’.  A simple game for young children to test
-their musical aptitude.  The best possibly real piano samples are used.
+their musical aptitude.  The best possible real piano samples are used.
 No prior formal musical training required.
 
 Two notes will be played in this game. You have to decide if the second note
