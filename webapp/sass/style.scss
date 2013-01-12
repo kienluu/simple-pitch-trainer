@@ -93,3 +93,19 @@ $paddingA: 15px;
 #audio-box-19875876 {
   display: none;
 }
+
+
+// Responsive Changes
+
+/* Landscape phone to portrait tablet */
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 34px;
+  }
+
+  .start-page, .stats-box, .trainer-box {
+    margin-top: 20px;
+  }
+}

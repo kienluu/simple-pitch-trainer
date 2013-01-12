@@ -101,3 +101,17 @@ ul.tabs {
 #audio-box-19875876 {
   display: none;
 }
+
+/* Landscape phone to portrait tablet */
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  /* line 104, ../sass/style.scss */
+  header h1 {
+    font-size: 34px;
+  }
+
+  /* line 108, ../sass/style.scss */
+  .start-page, .stats-box, .trainer-box {
+    margin-top: 20px;
+  }
+}
