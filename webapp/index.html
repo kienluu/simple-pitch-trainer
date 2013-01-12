@@ -28,65 +28,66 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="container">
+        <div class="container main-content">
 
         <div class="row-fluid">
-            <header><h1>Simple Pitch Trainer</h1></header>
-
-            <ul class="nav nav-tabs span12">
-                <li class="active"><a  data-toggle="tab" href="#startpage">Start</a></li>
-                <li><a href="#stats" data-toggle="tab">Statistics</a></li>
-            </ul>
-
-            <div class="tab-content span12">
-                <div class="tab-pane active start-page" id="startpage">
-                                <div class="start-box">
-                                    <div class="introduction">
-                                        <p>
-                                            Welcome to ‘Simple Pitch Trainer’.  A simple game for young children to test their musical aptitude.  The best possibly real piano samples are used.
-                                            No prior formal musical training required.
-                                        </p>
-                                        <p>
-                                            Two notes will be played in this game.  You have to decide if the second note is higher, lower, or the same as the first.
-                                        </p>
+            <div class="span12">
+                <header><h1>Simple Pitch Trainer</h1></header>
+                <p class="support-text">Only Chrome browser Supported</p>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a  data-toggle="tab" href="#startpage">Start</a></li>
+                    <li><a href="#stats" data-toggle="tab">Statistics</a></li>
+                </ul>
+                <div class="tab-content span12">
+                    <div class="tab-pane active start-page" id="startpage">
+                                    <div class="start-box">
+                                        <div class="introduction">
+                                            <p>
+                                                Welcome to ‘Simple Pitch Trainer’.  A simple game for young children to test their musical aptitude.  The best possibly real piano samples are used.
+                                                No prior formal musical training required.
+                                            </p>
+                                            <p>
+                                                Two notes will be played in this game.  You have to decide if the second note is higher, lower, or the same as the first.
+                                            </p>
+                                        </div>
+                                        <p class="start-text">Press ‘Start’ to begin</p>
+                                        <button
+                                              class="btn btn-large btn-primary start-button">
+                                            Start
+                                        </button>
                                     </div>
-                                    <p class="start-text">Press ‘Start’ to begin</p>
-                                    <button
-                                          class="btn btn-large btn-primary start-button">
-                                        Start
-                                    </button>
-                                </div>
 
-                                <div class="hidden trainer-box">
-                                    <div class="controls">
-                                        <button class="btn btn-large play">Play</button>
-                                    </div>
-                                    <div class="answer-choices">
-                                        <p>
-                                            Second tone is:
-                                        </p>
-                                        <div class="btn-group choices">
-                                            <button class="btn btn-large higher">Higher<div class="icon-wrapper"><span class="icon-ok"></span><span class="icon-remove"></span></div></button>
-                                            <button class="btn btn-large lower">Lower<div class="icon-wrapper"><span class="icon-ok"></span><span class="icon-remove"></span></div></button>
-                                            <button class="btn btn-large same">Same<div class="icon-wrapper"><span class="icon-ok"></span><span class="icon-remove"></span></div></button>
+                                    <div class="hidden trainer-box">
+                                        <div class="controls">
+                                            <button class="btn btn-large play">Play</button>
+                                        </div>
+                                        <div class="answer-choices">
+                                            <p>
+                                                Second tone is:
+                                            </p>
+                                            <div class="btn-group choices">
+                                                <button class="btn btn-large higher">Higher<div class="icon-wrapper"><span class="icon-ok"></span><span class="icon-remove"></span></div></button>
+                                                <button class="btn btn-large lower">Lower<div class="icon-wrapper"><span class="icon-ok"></span><span class="icon-remove"></span></div></button>
+                                                <button class="btn btn-large same">Same<div class="icon-wrapper"><span class="icon-ok"></span><span class="icon-remove"></span></div></button>
+                                            </div>
+                                        </div>
+                                        <div class="answer-info">
+                                            <p class="wrong-text">Nope, try again!<span class="icon-remove"></span></p>
+                                            <p class="correct-text">Correct!<span class="icon-ok"></span></p>
+                                        </div>
+                                        <div class="btn-group next-question">
+                                            <button class="btn btn-large next">Next</button>
                                         </div>
                                     </div>
-                                    <div class="answer-info">
-                                        <p class="wrong-text">Nope, try again!<span class="icon-remove"></span></p>
-                                        <p class="correct-text">Correct!<span class="icon-ok"></span></p>
-                                    </div>
-                                    <div class="btn-group next-question">
-                                        <button class="btn btn-large next">Next</button>
-                                    </div>
-                                </div>
-                </div>
-                <div class="tab-pane stats-box" id="stats">
-                    <h3>Correct Answers</h3>
-                    <p class="correct">&nbsp;12</p>
-                    <div class="divider"></div>
-                    <h3>Wrong Answers</h3>
-                    <p class="wrong">&nbsp;22</p>
-                </div>
+                    </div>
+                    <div class="tab-pane stats-box" id="stats">
+                        <h3>Correct Answers</h3>
+                        <p class="correct">&nbsp;</p>
+                        <div class="divider"></div>
+                        <h3>Wrong Answers</h3>
+                        <p class="wrong">&nbsp;</p>
+                    </div>
+                </div><!-- class="tab-content" -->
             </div>
         </div>
 

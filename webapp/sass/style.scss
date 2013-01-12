@@ -1,15 +1,27 @@
+//@import 'compass/css3';
+
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
-ul.tabs {
+
+ul.nav-tabs {
   text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 $mainPageTopPadding: 90px;
 $contentFontSize: 18px;
+
+.support-text {
+  text-align: center;
+  font-size: 12px;
+  color: #dcdcdc;
+  font-style: italic;
+}
 
 .tab-pane {
   font-size: $contentFontSize;
@@ -97,8 +109,6 @@ $paddingA: 15px;
 
 // Responsive Changes
 
-/* Landscape phone to portrait tablet */
-
 /* Landscape phones and down */
 @media (max-width: 480px) {
   header h1 {
@@ -107,5 +117,19 @@ $paddingA: 15px;
 
   .start-page, .stats-box, .trainer-box {
     margin-top: 20px;
+  }
+}
+
+.center li {
+  float: none;
+  display: inline-block;
+}
+
+/* Tablets upwards */
+@media (min-width: 480px) {
+  ul.nav-tabs > li {
+    float: none;
+    display: inline-block;
+    text-align: center;
   }
 }
