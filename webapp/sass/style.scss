@@ -39,6 +39,7 @@ $contentFontSize: 18px;
 
 .tab-pane {
   font-size: $contentFontSize;
+  text-align: center;
 }
 
 .start-page {
@@ -55,7 +56,7 @@ $contentFontSize: 18px;
   }
 }
 
-.trainer-box {
+.trainer-box, .settings-box {
   margin-top: $mainPageTopPadding;
 }
 
@@ -68,6 +69,10 @@ $contentFontSize: 18px;
   .wrong {
     color: #d6348f;
   }
+}
+
+.settings-box {
+  min-height: 190px;
 }
 
 // Pitch Trainer App
@@ -134,7 +139,7 @@ $paddingA: 15px;
     margin-left: -20px;
   }
 
-  .start-page, .stats-box, .trainer-box {
+  .start-page, .stats-box, .trainer-box, settings-box {
     margin-top: 20px;
   }
 }

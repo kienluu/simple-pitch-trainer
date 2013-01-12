@@ -66,10 +66,20 @@
             doNotDisablePlay:true
         });
 
+        // Options
+
+        $('.settings-box .dropdown-menu.difficulty a').click(function(e){
+           var $a = $(this);
+            var difficultyLevel = parseInt($a.attr('data-difficulty'));
+            $('.settings-box .difficulty-level').text($a.text());
+            noteTrainerApp.setDifficulty(difficultyLevel);
+        });
+        $('.settings-box .dropdown-menu.difficulty a.default-level').click();
+
         // Debug
 //        $('.start-button').click();
 //        window._app = noteTrainerApp;
-
+//        $('a[href="#settings"]').click()
     });
 
     var RandomNoteTrainer = function() {
@@ -108,6 +118,7 @@
         };
 
         self.makeQuestion = function() {
+            //console.log(difficulty);
             if (difficultyMap[difficulty]){
                 var maxDistance = difficultyMap[difficulty];
                 var result = getTwoNotes(maxDistance)
@@ -126,13 +137,13 @@
             var indx2 = indx + dx;
             indx2 = Math.min(notes.length - 1, Math.max(0, indx2));
 
-            console.log(indx, indx2);
+            //console.log(indx, indx2);
             return {index1: indx, index2: indx2};
         };
 
 
         self.setDifficulty = function(level){
-            if (difficultyMap[difficulty]){
+            if (difficultyMap[level]){
                 difficulty = level;
             }
             else{

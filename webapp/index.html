@@ -35,8 +35,9 @@
                 <header><h1>Simple Pitch Trainer</h1></header>
                 <p class="support-text">Only Chrome browser Supported</p>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a  data-toggle="tab" href="#startpage">Start</a></li>
+                    <li class="active"><a  data-toggle="tab" href="#startpage">Game</a></li>
                     <li><a href="#stats" data-toggle="tab">Statistics</a></li>
+                    <li><a href="#settings" data-toggle="tab">Options</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active start-page" id="startpage">
@@ -86,6 +87,21 @@
                         <div class="divider"></div>
                         <h3>Wrong Answers</h3>
                         <p class="wrong">&nbsp;</p>
+                    </div>
+                    <div class="tab-pane settings-box" id="settings">
+                        <p>Current: <span class="difficulty-level"></span></p>
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+                                Choose Difficulty
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu difficulty">
+                                <li><a data-difficulty="0">Tone deaf</a></li>
+                                <li><a data-difficulty="1">Easy</a></li>
+                                <li><a data-difficulty="2" class="default-level">Normal</a></li>
+                                <li><a data-difficulty="3">Hard</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div><!-- class="tab-content" -->
             </div>
