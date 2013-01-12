@@ -15,6 +15,10 @@
             next: '.btn-group button.next'
         };
 
+        var gameStats = new GameStats();
+        $correctAnswerCountP = $('.stats-box p.correct');
+        $wrongAnswerCountP = $('.stats-box p.wrong');
+
         var resetElementStyles = function() {
             // Clear up all the answer related divs / icons
             $('.answer-info p.show, .answer-choices .icon-remove, .answer-choices .icon-ok').removeClass('show');
@@ -22,6 +26,8 @@
 
         var onNewQuestion = function() {
             resetElementStyles();
+
+            gameStats.addNewQuestion();
         };
 
         var onWrongAnswer = function(event, app) {
@@ -29,6 +35,9 @@
             $button = $(buttonSelectors[app.getLastChoice()]);
             $button.find('.icon-remove').addClass('show');
             $('.answer-info p.wrong-text').addClass('show');
+
+            gameStats.addWrong();
+            $wrongAnswerCountP.text(gameStats.totalWrongCount());
         };
 
         var onCorrectAnswer = function(event, app) {
@@ -36,6 +45,9 @@
             $button = $(buttonSelectors[app.getLastChoice()]);
             $button.find('.icon-ok').addClass('show');
             $('.answer-info p.correct-text').addClass('show');
+
+            gameStats.addCorrect();
+            $correctAnswerCountP.text(gameStats.totalCorrectCount());
         };
 
 
@@ -51,7 +63,7 @@
         });
 
         // Debug
-//        $('.start-button').click();
+        $('.start-button').click();
 //        window._app = noteTrainerApp;
 
     });
@@ -67,7 +79,7 @@
         var noteA;
         var noteB;
 
-        var init = function (options) {
+        var init = function () {
             for (var i=0; i < octaves.length; i++){
                 var octave = octaves[i];
                 for (var j=0; j < letters.length; j++){
@@ -86,26 +98,23 @@
             console.log(noteA, noteB);
         };
 
-        self.getNoteA = function() {return noteA; }
-        self.getNoteB = function() {return noteB; }
+        self.getNoteA = function() {return noteA; };
+        self.getNoteB = function() {return noteB; };
         self.answerQuestion = function(guess){
           if (guess=='same'){
-              if (noteB.value == noteA.value) return true;
-              return false;
+              return noteB.value == noteA.value;
           }
           else if (guess=='lower') {
-              if (noteB.value < noteA.value) return true;
-              return false
+              return noteB.value < noteA.value;
           }
           else if (guess=='higher') {
-              if (noteB.value > noteA.value) return true;
-              return false;
+              return noteB.value > noteA.value;
           }
           throw Error('Unknown value for guess.');
         };
 
         init();
-    }
+    };
 
     var NoteTrainerEngine = function(options) {
         var self = this;
@@ -125,8 +134,8 @@
         var init = function() {
             // NOTE: If using source, the whole audio tag must be replaced as its src will not automatically refresh
             // NOTE2: chrome needs the server to support 206 partial content to play.  firefox dont but it needs ogg files
-            var $audioBox = '';
-            $('body').append('<div id="audio-box-19875876"><audio class="audio-a" controls preload="auto"></audio><audio class="audio-b" controls preload="auto"></audio></div>');
+            var $audioBox = $('<div id="audio-box-19875876"><audio class="audio-a" controls preload="auto"></audio><audio class="audio-b" controls preload="auto"></audio></div>');
+            $('body').append($audioBox);
 
             $audioA = $('#audio-box-19875876 .audio-a');
             audioA = $audioA.get(0);
@@ -169,19 +178,24 @@
 
         self.stopAudio = function() {
             if (timeOut) clearTimeout(timeOut);
-            audioA.pause();
-            audioA.currentTime = 0;
-            audioB.pause();
-            audioB.currentTime = 0;
+            try {
+                audioA.pause();
+                audioA.currentTime = 0;
+                audioB.pause();
+                audioB.currentTime = 0;
+            }
+            catch (error){
+                // Ignore
+            }
         };
 
         init();
-    }
+    };
 
     var NoteTrainerApp = function(options) {
         var self = this;
         var $self = $(this);
-        var options = options || {};
+        options = options || {};
         var engine = new NoteTrainerEngine(options);
         var $sameButtons, $lowerButtons, $higherButtons, $playButtons, $nextButtons;
         var lastChoice = '';
@@ -236,7 +250,7 @@
         
         var restart = function() {
           engine.stopAudio();
-          engine.makeQuestion(); 
+          engine.makeQuestion();
           enableChoices();
           $self.trigger('newquestion');
         };
@@ -281,6 +295,76 @@
         };
 
         init();
+    };
+
+
+    var GameStats = function(options) {
+        var self = this;
+        var $self = $(self);
+        options = options || {};
+        var currentStat;
+        var statList = [];
+
+        var init = function() {
+            reset();
+        };
+
+        var reset = function() {
+            statList = [];
+        };
+
+        var createStat = function(questionNo) {
+            var stats =  {
+                wrong: 0,
+                correct: 0,
+                questionNo: questionNo
+            };
+            return stats;
+        };
+
+
+        // Public
+
+        self.addNewQuestion = function() {
+            var stats = createStat(statList.length + 1);
+            currentStat = stats;
+            statList.push(stats);
+        };
+
+        self.addWrong = function() {
+            currentStat.wrong += 1;
+        };
+
+        self.addCorrect = function() {
+            currentStat.correct += 1;
+        };
+
+        // statistics
+
+        self.totalCorrectCount = function () {
+            var sum = 0;
+            _.each(statList, function(stat){
+                sum += stat.correct;
+            });
+            return sum;
+        };
+
+        self.totalWrongCount = function() {
+            var sum = 0;
+            _.each(statList, function(stat){
+                sum += stat.wrong;
+            });
+            return sum;
+        };
+
+        self.totalQuestionCount = function() {
+            return statList.length;
+        };
+
+        init()
+
+        // DEBUG
+        window.statList = statList;
     };
 
 

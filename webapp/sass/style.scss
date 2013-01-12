@@ -9,11 +9,14 @@ ul.tabs {
 }
 
 $mainPageTopPadding: 90px;
+$contentFontSize: 18px;
+
+.tab-pane {
+  font-size: $contentFontSize;
+}
 
 .start-page {
-  height: 500px;
   text-align: center;
-  font-size: 18px;
   margin-top: $mainPageTopPadding;
 
   .introduction p {
@@ -28,6 +31,17 @@ $mainPageTopPadding: 90px;
 
 .trainer-box {
   margin-top: $mainPageTopPadding;
+}
+
+.stats-box {
+  margin-top: $mainPageTopPadding;
+  text-align: center;
+  .correct {
+    color: #34d654;
+  }
+  .wrong {
+    color: #d6348f;
+  }
 }
 
 // Pitch Trainer App

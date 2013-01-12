@@ -9,46 +9,63 @@ ul.tabs {
   text-align: center;
 }
 
-/* line 13, ../sass/style.scss */
-.start-page {
-  height: 500px;
-  text-align: center;
+/* line 14, ../sass/style.scss */
+.tab-pane {
   font-size: 18px;
+}
+
+/* line 18, ../sass/style.scss */
+.start-page {
+  text-align: center;
   margin-top: 90px;
 }
-/* line 19, ../sass/style.scss */
+/* line 22, ../sass/style.scss */
 .start-page .introduction p {
   color: #666677;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-/* line 24, ../sass/style.scss */
+/* line 27, ../sass/style.scss */
 .start-page p.start-text {
   margin-top: 10px;
 }
 
-/* line 29, ../sass/style.scss */
+/* line 32, ../sass/style.scss */
 .trainer-box {
   margin-top: 90px;
 }
 
-/* line 38, ../sass/style.scss */
+/* line 36, ../sass/style.scss */
+.stats-box {
+  margin-top: 90px;
+  text-align: center;
+}
+/* line 39, ../sass/style.scss */
+.stats-box .correct {
+  color: #34d654;
+}
+/* line 42, ../sass/style.scss */
+.stats-box .wrong {
+  color: #d6348f;
+}
+
+/* line 52, ../sass/style.scss */
 .answer-choices {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-/* line 41, ../sass/style.scss */
+/* line 55, ../sass/style.scss */
 .answer-choices button {
   position: relative;
 }
-/* line 43, ../sass/style.scss */
+/* line 57, ../sass/style.scss */
 .answer-choices button .icon-wrapper {
   margin: 0;
   left: 50%;
   bottom: -5px;
   position: absolute;
 }
-/* line 49, ../sass/style.scss */
+/* line 63, ../sass/style.scss */
 .answer-choices button .icon-remove, .answer-choices button .icon-ok {
   margin: 0;
   position: relative;
@@ -56,31 +73,31 @@ ul.tabs {
   left: -7px;
   display: none;
 }
-/* line 55, ../sass/style.scss */
+/* line 69, ../sass/style.scss */
 .answer-choices button .icon-remove.show, .answer-choices button .icon-ok.show {
   display: block;
 }
 
-/* line 62, ../sass/style.scss */
+/* line 76, ../sass/style.scss */
 .answer-info {
   margin: 15px 0;
 }
-/* line 64, ../sass/style.scss */
+/* line 78, ../sass/style.scss */
 .answer-info .icon-remove, .answer-info .icon-ok {
   top: 2px;
   position: relative;
   left: 7px;
 }
-/* line 70, ../sass/style.scss */
+/* line 84, ../sass/style.scss */
 .answer-info p {
   display: none;
 }
-/* line 72, ../sass/style.scss */
+/* line 86, ../sass/style.scss */
 .answer-info p.show {
   display: block;
 }
 
-/* line 79, ../sass/style.scss */
+/* line 93, ../sass/style.scss */
 #audio-box-19875876 {
   display: none;
 }
