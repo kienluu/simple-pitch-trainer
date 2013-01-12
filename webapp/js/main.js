@@ -57,9 +57,12 @@
             higherButtonSelectors: buttonSelectors.higher,
             playButtonSelectors: buttonSelectors.play,
             nextButtonSelectors: buttonSelectors.next,
+
             onNewQuestion: onNewQuestion,
             onWrongAnswer: onWrongAnswer,
-            onCorrectAnswer: onCorrectAnswer
+            onCorrectAnswer: onCorrectAnswer,
+
+            doNotDisablePlay:true
         });
 
         // Debug
@@ -116,20 +119,19 @@
         init();
     };
 
-    var NoteTrainerEngine = function(options) {
+    var NoteTrainerEngine = function(_options) {
         var self = this;
         var $self = $(this);
-        options = options || {};
+        var defaultOptions = {
+            secondTonePlayDelay: 1300
+        };
+        var options = $.extend({}, defaultOptions, _options);
+
         var EVENT_FINNISH_PLAY_BACK = 'finnishplayback';
 
         var $audioA, $audioB, audioA, audioB;
         // Declare here for ide auto completion
         var noteTrainer = new RandomNoteTrainer();
-        var secondTonePlayDelay = 2000;
-
-        if (typeof(options.secondTonePlayDelay) === "number"){
-            secondTonePlayDelay = options.secondTonePlayDelay;
-        }
 
         var init = function() {
             // NOTE: If using source, the whole audio tag must be replaced as its src will not automatically refresh
@@ -171,8 +173,8 @@
                 timeOut = setTimeout(function(){
                     timeOut = null;
                     $self.trigger(EVENT_FINNISH_PLAY_BACK);
-                }, secondTonePlayDelay);
-            }, secondTonePlayDelay);
+                }, options.secondTonePlayDelay);
+            }, options.secondTonePlayDelay);
         };
 
         self.stopAudio = function() {
@@ -191,10 +193,18 @@
         init();
     };
 
-    var NoteTrainerApp = function(options) {
+    var NoteTrainerApp = function(_options) {
         var self = this;
         var $self = $(this);
-        options = options || {};
+        var defaultOptions = {
+            doNotDisablePlay: false
+        }
+        var options = $.extend({}, defaultOptions, _options);
+
+        var EVENT_NEW_QUESTION = 'newquestion';
+        var EVENT_ANSWER_WRONG = 'answerwrong';
+        var EVENT_ANSWER_CORRECT = 'answercorrect';
+
         var engine = new NoteTrainerEngine(options);
         var $sameButtons, $lowerButtons, $higherButtons, $playButtons, $nextButtons;
         var lastChoice = '';
@@ -221,13 +231,13 @@
             });
 
             if (options.onNewQuestion) {
-                $self.bind('newquestion', options.onNewQuestion);
+                $self.bind(EVENT_NEW_QUESTION, options.onNewQuestion);
             }
             if (options.onWrongAnswer) {
-                $self.bind('answerwrong', options.onWrongAnswer);
+                $self.bind(EVENT_ANSWER_WRONG, options.onWrongAnswer);
             }
             if (options.onCorrectAnswer) {
-                $self.bind('answercorrect', options.onCorrectAnswer);
+                $self.bind(EVENT_ANSWER_CORRECT, options.onCorrectAnswer);
             }
 
             start();
@@ -235,7 +245,8 @@
 
         var play = function() {
             engine.play();
-            $playButtons.prop('disabled', true);
+            if (!options.doNotDisablePlay)
+                $playButtons.prop('disabled', true);
         };
         self.play = play;
 
