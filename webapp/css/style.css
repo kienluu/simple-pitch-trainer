@@ -6,17 +6,30 @@ h1 {
 
 /* line 9, ../sass/style.scss */
 .main-content {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 /* line 13, ../sass/style.scss */
+footer {
+  background: white;
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  bottom: 0px;
+}
+/* line 19, ../sass/style.scss */
+footer .project-host-box {
+  text-align: center;
+}
+
+/* line 24, ../sass/style.scss */
 ul.nav-tabs {
   text-align: center;
   margin-left: 20px;
   margin-right: 20px;
 }
 
-/* line 22, ../sass/style.scss */
+/* line 33, ../sass/style.scss */
 .support-text {
   text-align: center;
   font-size: 12px;
@@ -24,63 +37,63 @@ ul.nav-tabs {
   font-style: italic;
 }
 
-/* line 29, ../sass/style.scss */
+/* line 40, ../sass/style.scss */
 .tab-pane {
   font-size: 18px;
 }
 
-/* line 33, ../sass/style.scss */
+/* line 44, ../sass/style.scss */
 .start-page {
   text-align: center;
   margin-top: 90px;
 }
-/* line 37, ../sass/style.scss */
+/* line 48, ../sass/style.scss */
 .start-page .introduction p {
   color: #666677;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-/* line 42, ../sass/style.scss */
+/* line 53, ../sass/style.scss */
 .start-page p.start-text {
   margin-top: 10px;
 }
 
-/* line 47, ../sass/style.scss */
+/* line 58, ../sass/style.scss */
 .trainer-box {
   margin-top: 90px;
 }
 
-/* line 51, ../sass/style.scss */
+/* line 62, ../sass/style.scss */
 .stats-box {
   margin-top: 90px;
   text-align: center;
 }
-/* line 54, ../sass/style.scss */
+/* line 65, ../sass/style.scss */
 .stats-box .correct {
   color: #34d654;
 }
-/* line 57, ../sass/style.scss */
+/* line 68, ../sass/style.scss */
 .stats-box .wrong {
   color: #d6348f;
 }
 
-/* line 67, ../sass/style.scss */
+/* line 78, ../sass/style.scss */
 .answer-choices {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-/* line 70, ../sass/style.scss */
+/* line 81, ../sass/style.scss */
 .answer-choices button {
   position: relative;
 }
-/* line 72, ../sass/style.scss */
+/* line 83, ../sass/style.scss */
 .answer-choices button .icon-wrapper {
   margin: 0;
   left: 50%;
   bottom: -5px;
   position: absolute;
 }
-/* line 78, ../sass/style.scss */
+/* line 89, ../sass/style.scss */
 .answer-choices button .icon-remove, .answer-choices button .icon-ok {
   margin: 0;
   position: relative;
@@ -88,48 +101,48 @@ ul.nav-tabs {
   left: -7px;
   display: none;
 }
-/* line 84, ../sass/style.scss */
+/* line 95, ../sass/style.scss */
 .answer-choices button .icon-remove.show, .answer-choices button .icon-ok.show {
   display: block;
 }
 
-/* line 91, ../sass/style.scss */
+/* line 102, ../sass/style.scss */
 .answer-info {
   margin: 15px 0;
 }
-/* line 93, ../sass/style.scss */
+/* line 104, ../sass/style.scss */
 .answer-info .icon-remove, .answer-info .icon-ok {
   top: 2px;
   position: relative;
   left: 7px;
 }
-/* line 99, ../sass/style.scss */
+/* line 110, ../sass/style.scss */
 .answer-info p {
   display: none;
 }
-/* line 101, ../sass/style.scss */
+/* line 112, ../sass/style.scss */
 .answer-info p.show {
   display: block;
 }
 
-/* line 108, ../sass/style.scss */
+/* line 119, ../sass/style.scss */
 #audio-box-19875876 {
   display: none;
 }
 
 /* Landscape phones to portrait tablets */
 @media (max-width: 767px) {
-  /* line 117, ../sass/style.scss */
+  /* line 128, ../sass/style.scss */
   header h1 {
     font-size: 34px;
   }
 
-  /* line 121, ../sass/style.scss */
+  /* line 132, ../sass/style.scss */
   .start-page, .stats-box, .trainer-box {
     margin-top: 20px;
   }
 }
-/* line 126, ../sass/style.scss */
+/* line 137, ../sass/style.scss */
 .center li {
   float: none;
   display: inline-block;
@@ -137,7 +150,7 @@ ul.nav-tabs {
 
 /* Tablets upwards */
 @media (min-width: 480px) {
-  /* line 133, ../sass/style.scss */
+  /* line 144, ../sass/style.scss */
   ul.nav-tabs > li {
     float: none;
     display: inline-block;
