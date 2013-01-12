@@ -13,12 +13,12 @@ h1 {
 footer {
   background: white;
   width: 100%;
-  padding: 10px;
   position: fixed;
   bottom: 0px;
 }
-/* line 19, ../sass/style.scss */
+/* line 18, ../sass/style.scss */
 footer .project-host-box {
+  padding: 10px 0px;
   text-align: center;
 }
 
@@ -138,11 +138,16 @@ ul.nav-tabs {
   }
 
   /* line 132, ../sass/style.scss */
+  footer {
+    margin-left: -20px;
+  }
+
+  /* line 137, ../sass/style.scss */
   .start-page, .stats-box, .trainer-box {
     margin-top: 20px;
   }
 }
-/* line 137, ../sass/style.scss */
+/* line 142, ../sass/style.scss */
 .center li {
   float: none;
   display: inline-block;
@@ -150,7 +155,7 @@ ul.nav-tabs {
 
 /* Tablets upwards */
 @media (min-width: 480px) {
-  /* line 144, ../sass/style.scss */
+  /* line 149, ../sass/style.scss */
   ul.nav-tabs > li {
     float: none;
     display: inline-block;
