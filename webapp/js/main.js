@@ -154,11 +154,7 @@
 
         var timeOut;
         self.play = function() {
-            if (timeOut) clearTimeout(timeOut);
-            audioA.pause();
-            audioA.currentTime = 0;
-            audioB.pause();
-            audioB.currentTime = 0;
+            self.stopAudio();
 
             audioA.play();
             timeOut = setTimeout(function(){
@@ -169,6 +165,14 @@
                     $self.trigger(EVENT_FINNISH_PLAY_BACK);
                 }, secondTonePlayDelay);
             }, secondTonePlayDelay);
+        };
+
+        self.stopAudio = function() {
+            if (timeOut) clearTimeout(timeOut);
+            audioA.pause();
+            audioA.currentTime = 0;
+            audioB.pause();
+            audioB.currentTime = 0;
         };
 
         init();
@@ -231,7 +235,8 @@
         };
         
         var restart = function() {
-          engine.makeQuestion();  
+          engine.stopAudio();
+          engine.makeQuestion(); 
           enableChoices();
           $self.trigger('newquestion');
         };
@@ -261,12 +266,14 @@
             $sameButtons.prop('disabled', true);
             $lowerButtons.prop('disabled', true);
             $higherButtons.prop('disabled', true);
+            $nextButtons.prop('disabled', false);
         };
         
         var enableChoices = function() {
             $sameButtons.prop('disabled', false);
             $lowerButtons.prop('disabled', false);
             $higherButtons.prop('disabled', false);
+            $nextButtons.prop('disabled', true);
         };
 
         this.getLastChoice = function() {
