@@ -8,6 +8,8 @@ No prior formal musical training required.
 Two notes will be played in this game. You have to decide if the second note
 is higher, lower, or the same as the first.
 
+View the app online at [simplepitch.appspot.com](http://simplepitch.appspot.com).
+
 
 ## Local dev
 ===
