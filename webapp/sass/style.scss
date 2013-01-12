@@ -8,22 +8,32 @@ ul.tabs {
   text-align: center;
 }
 
-table.middle-align {
-  width: 100%;
-  height: 100%;
-  td {
-    vertical-align: middle;
-  }
-}
+$mainPageTopPadding: 90px;
 
 .start-page {
   height: 500px;
   text-align: center;
   font-size: 18px;
+  margin-top: $mainPageTopPadding;
 
+  .introduction p {
+    color: #666677;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  p.start-text {
+    margin-top: 10px;
+  }
 }
 
+.trainer-box {
+  margin-top: $mainPageTopPadding;
+}
+
+// Pitch Trainer App
+
 $paddingA: 15px;
+
 
 .answer-choices {
   margin-top: $paddingA;

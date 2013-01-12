@@ -31,7 +31,7 @@
             $('.answer-info p.wrong-text').addClass('show');
         };
 
-        var onCorrectAnswer = function() {
+        var onCorrectAnswer = function(event, app) {
             resetElementStyles();
             $button = $(buttonSelectors[app.getLastChoice()]);
             $button.find('.icon-ok').addClass('show');
@@ -51,8 +51,8 @@
         });
 
         // Debug
-        $('.start-button').click();
-        window.app = noteTrainerApp;
+//        $('.start-button').click();
+//        window._app = noteTrainerApp;
 
     });
 
