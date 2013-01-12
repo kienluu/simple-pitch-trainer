@@ -66,7 +66,7 @@
         });
 
         // Debug
-        $('.start-button').click();
+//        $('.start-button').click();
 //        window._app = noteTrainerApp;
 
     });
@@ -373,8 +373,6 @@
 
         init()
 
-        // DEBUG
-        window.statList = statList;
     };
 
 
