@@ -95,7 +95,7 @@
         self.makeQuestion = function() {
             noteA = notes[Math.floor(Math.random() * notes.length)];
             noteB = notes[Math.floor(Math.random() * notes.length)];
-            console.log(noteA, noteB);
+            //console.log(noteA, noteB);
         };
 
         self.getNoteA = function() {return noteA; };
@@ -146,7 +146,6 @@
             $audioB.bind('ended', function(){
                 if (timeOut){
                     $self.trigger(EVENT_FINNISH_PLAY_BACK);
-                    console.log('test');
                 }
             });
         };
@@ -258,7 +257,7 @@
         var answerQuestion = function(choice) {
             lastChoice = choice;
             var success = engine.answerQuestion(choice);
-            console.log(success);
+            //console.log(success);
             if (!success){
                 onWrong();
             }
